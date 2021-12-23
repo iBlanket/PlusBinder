@@ -10,7 +10,6 @@
 #pragma once
 #include <vector>
 
-// probably the worst way to do callbacks
 typedef void( __cdecl* pKeyStateCallback )( int vkKey );
 
 enum e_KeyState {
@@ -48,8 +47,5 @@ public:
 		return e_KeyState::KEY_NOP;
 	}
 
-	// empty constructor -_-
-	VirtualKey_t( ) {
-
-	}
+	VirtualKey_t( ) = default;
 };
