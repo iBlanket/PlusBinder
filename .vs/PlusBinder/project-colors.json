@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "1e00ac93-b8f8-4018-b056-8fd26c1e5cfd": {
+      "ProjectGuid": "1e00ac93-b8f8-4018-b056-8fd26c1e5cfd",
+      "DisplayName": "PlusBinder",
+      "ColorIndex": 0
+    },
+    "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3": {
+      "ProjectGuid": "a2fe74e1-b743-11d0-ae1a-00a0c90fffc3",
+      "DisplayName": "Miscellaneous Files",
+      "ColorIndex": -1
+    }
+  },
+  "NextColorIndex": 1
+}
