@@ -53,7 +53,7 @@ Github: https://github.com/fuckblanket
 
 	n_KeyBoard::Initialize( );
 
-	n_KeyBoard::VirtualKeys[ VK_LEFT ].OnKey.push_back( KeyDown );
+	n_KeyBoard::VirtualKeys[ VK_LEFT ].m_KeyCallbacks.push_back( KeyDown );
 
 
 	std::cin.get( );

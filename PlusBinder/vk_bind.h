@@ -24,7 +24,7 @@ struct VirtualKey_t {
 private:
 
 public:
-	std::vector<pKeyStateCallback> OnKey{ };
+	std::vector<pKeyStateCallback> m_KeyCallbacks{ };
 
 	// todo: use a vector of bools for storing previous states
 	bool m_bWasDown = false;
