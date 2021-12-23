@@ -9,7 +9,6 @@
 #include <thread>
 #include "keyboard.h"
 
-// intentionally unsafe code, we want to check if its nullptr to see if weve initialized the hook
 HHOOK* hkKbdHook = nullptr;
 
 
