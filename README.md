@@ -35,7 +35,7 @@
 
 ```C++
 // change the line 
-typedef void* ( __cdecl* pKeyStateCallback )( int vkKey );
+typedef void ( __cdecl* pKeyStateCallback )( int vkKey );
 // in vk_bind.h to whatever your calling convention is and whatever u want.
 ```
 ### Initializing Key Manager
@@ -49,7 +49,7 @@ int main(){
 ### Key States Callbacks
 ```C++
 
-void* KeyDown( int vkKey ) {
+void KeyDown( int vkKey ) {
 	VirtualKey_t* vkBind = &n_KeyBoard::VirtualKeys[ vkKey ];
 
 	// only call this in callbacks
@@ -75,8 +75,6 @@ void* KeyDown( int vkKey ) {
 		}
 		break;
 	}
-
-	return 0;
 }
 
 void InitializeCallbacks(){
