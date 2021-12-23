@@ -11,7 +11,7 @@
 #include <vector>
 
 // probably the worst way to do callbacks
-typedef void* ( __cdecl* pKeyStateCallback )( int vkKey );
+typedef void( __cdecl* pKeyStateCallback )( int vkKey );
 
 enum e_KeyState {
 	KEY_HELD = 0,	// key is held down
