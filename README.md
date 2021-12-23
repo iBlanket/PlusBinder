@@ -35,7 +35,7 @@
 
 ```C++
 // change the line 
-typedef void* ( __cdecl* pKeyStateCallback )( int vkKey );
+typedef void ( __cdecl* pKeyStateCallback )( int vkKey );
 // in vk_bind.h to whatever your calling convention is and whatever u want.
 ```
 ### Initializing Key Manager
