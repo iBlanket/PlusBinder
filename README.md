@@ -96,3 +96,4 @@ void InitializeCallbacks(){
  n_KeyBoard::VirtualKeys[ VK_LEFT ].m_bWasDown; // was the key down or up the last time the keyhook was called.
 ```
 
+- For more documentation simply read the code, its not that terrible (;
