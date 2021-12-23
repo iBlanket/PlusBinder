@@ -81,7 +81,7 @@ void* KeyDown( int vkKey ) {
 
 void InitializeCallbacks(){
  // make sure you initialize keyboard before doing this
- // VirtualKeys is a 
+ // VirtualKeys is an array of all keys
  n_KeyBoard::VirtualKeys[ VK_LEFT ].OnKey.emplace_back( KeyDown );
 }
 ```
