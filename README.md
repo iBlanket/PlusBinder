@@ -15,7 +15,7 @@
  int m_iInteger;
  string m_szString;
 
- // Classes, Namespaces, and Structs are pascal case and use the following prefixes ex.
+ // Classes, Namespaces, and Structs are PascalCase and use the following prefixes ex.
  class CClassName
  namespace n_NamespaceName
  struct MyStruct_t
