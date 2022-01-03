@@ -33,11 +33,6 @@
 ## Usage
  - Copy keyboard.h, vk_bind.h, and keyboard.c++ to your project.
 
-```C++
-// change the line 
-typedef void ( __cdecl* pKeyStateCallback )( int vkKey );
-// in vk_bind.h to whatever your calling convention is and whatever u want.
-```
 ### Initializing Key Manager
 
 ```C++
