@@ -25,7 +25,7 @@ LRESULT CALLBACK CallbackKBDLL( int nCode, WPARAM wParam, LPARAM lParam ) {
 
 
 		for ( const auto pFuncPtr : pBindableKey->m_KeyCallbacks )
-			pFuncPtr( ( int )pKbdll->vkCode );
+			pFuncPtr( pKbdll->vkCode );
 	}
 
 

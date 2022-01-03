@@ -14,7 +14,7 @@
 #include <iostream>
 #include "keyboard.h"
 
-void KeyDown( int vkKey ) {
+void KeyDown( DWORD vkKey ) {
 	VirtualKey_t* vkBind = &n_KeyBoard::VirtualKeys[ vkKey ];
 
 	// only call this in callbacks
@@ -53,7 +53,6 @@ Github: https://github.com/fuckblanket/PlusBinder
 	n_KeyBoard::Initialize( );
 
 	n_KeyBoard::VirtualKeys[ VK_LEFT ].m_KeyCallbacks.push_back( KeyDown );
-
 
 	std::cin.get( );
 }

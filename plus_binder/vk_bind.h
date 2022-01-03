@@ -20,17 +20,13 @@ enum e_KeyState {
 };
 
 struct VirtualKey_t {
-	std::vector<std::function<void( int /* vkCode */ )>> m_KeyCallbacks{ };
-
-	// todo: use a vector of bools for storing previous states
-	bool m_bWasDown = false;
-	bool m_bIsDown = false;
-
+	std::vector<std::function<void( DWORD /* vkCode */ )>> m_KeyCallbacks{ };
+	bool m_bWasDown = false, m_bIsDown = false;
 
 	//========================================================================================================
 	// Purpose: Easily tell what "state" key is in ( note, do not call this outside of key change callback)
 	//========================================================================================================
-	e_KeyState GetKeyState( ) {
+	const e_KeyState GetKeyState( ) {
 		// this isnt great, its really simple, works, and is easy to visualize.
 		if ( m_bIsDown )
 			if ( m_bWasDown )
@@ -44,8 +40,11 @@ struct VirtualKey_t {
 		return e_KeyState::KEY_NOP;
 	}
 
+
+	//========================================================================================================
+	// Constructor
+	//========================================================================================================
 	VirtualKey_t( ) = default;
 
 private:
-
 };
