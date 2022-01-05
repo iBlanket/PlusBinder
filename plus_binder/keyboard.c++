@@ -18,7 +18,7 @@ LRESULT CALLBACK CallbackKBDLL( int nCode, WPARAM wParam, LPARAM lParam ) {
 
 	// save/set our key bind data
 	{
-		VirtualKey_t* pBindableKey = &n_KeyBoard::VirtualKeys[ ( int )pKbdll->vkCode ];
+		VirtualKey_t* pBindableKey = &n_KeyBoard::VirtualKeys[ pKbdll->vkCode ];
 
 		pBindableKey->m_bWasDown = pBindableKey->m_bIsDown;
 		pBindableKey->m_bIsDown = wParam == WM_KEYDOWN && wParam != WM_KEYUP;
