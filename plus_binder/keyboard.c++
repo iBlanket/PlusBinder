@@ -24,8 +24,9 @@ LRESULT CALLBACK CallbackKBDLL( int nCode, WPARAM wParam, LPARAM lParam ) {
 		pBindableKey->m_bIsDown = wParam == WM_KEYDOWN && wParam != WM_KEYUP;
 
 
-		for ( const auto pFuncPtr : pBindableKey->m_KeyCallbacks )
-			pFuncPtr( pKbdll->vkCode );
+		for ( auto pFunc : pBindableKey->m_KeyCallbacks )
+			if ( pFunc )
+				pFunc( pKbdll->vkCode );
 	}
 
 
