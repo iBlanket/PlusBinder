@@ -43,6 +43,9 @@ void KeyDown( DWORD vkKey ) {
 
 }
 
+void KeyDown2( DWORD vkKey ) {
+	std::cout << "callback2\n";
+}
 int main( ) {
 	std::cout << R"(
 C++ Key Binding System
@@ -52,7 +55,9 @@ Github: https://github.com/fuckblanket/PlusBinder
 
 	n_KeyBoard::Initialize( );
 
-	n_KeyBoard::VirtualKeys[ VK_LEFT ].m_KeyCallbacks.push_back( KeyDown );
+	n_KeyBoard::VirtualKeys[ VK_LEFT ].m_KeyCallbacks.emplace_back( KeyDown );
+	n_KeyBoard::VirtualKeys[ VK_LEFT ].m_KeyCallbacks.pop_back( );
+	n_KeyBoard::VirtualKeys[ VK_LEFT ].m_KeyCallbacks.emplace_back( KeyDown2 );
 
 	std::cin.get( );
 }
