@@ -20,9 +20,8 @@ LRESULT CALLBACK CallbackKBDLL( int nCode, WPARAM wParam, LPARAM lParam ) {
 	{
 		VirtualKey_t* pBindableKey = &n_KeyBoard::VirtualKeys[ pKbdll->vkCode ];
 
-		pBindableKey->m_bWasDown = pBindableKey->m_bIsDown;
-		pBindableKey->m_bIsDown = wParam == WM_KEYDOWN && wParam != WM_KEYUP;
-
+		pBindableKey->GetWasKeyDown( ) = pBindableKey->GetIsKeyDown( );
+		pBindableKey->GetIsKeyDown( ) = wParam == WM_KEYDOWN && wParam != WM_KEYUP;
 
 		for ( auto pFunc : pBindableKey->m_KeyCallbacks )
 			if ( pFunc )
