@@ -47,7 +47,7 @@ int main( ) {
 	std::cout << R"(
 C++ Key Binding System
 Written By: Blanket
-Github: https://github.com/fuckblanket/PlusBinder
+Github: https://github.com/iBlanket/PlusBinder
 )";
 
 	n_KeyBoard::Initialize( );
