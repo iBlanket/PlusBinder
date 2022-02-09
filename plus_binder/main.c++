@@ -36,7 +36,7 @@ int main( ) {
 	std::cout << R"(
 C++ Key Binding System
 Written By: Blanket
-Github: https://github.com/fuckblanket/PlusBinder
+Github: https://github.com/iBlanket/PlusBinder
 )";
 
 	CKeyboard::Get( ).Initialize( );
