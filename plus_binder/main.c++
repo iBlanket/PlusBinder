@@ -14,33 +14,22 @@
 #include <iostream>
 #include "keyboard.h"
 
-void KeyDown( DWORD vkKey ) {
-	VirtualKey_t* vkBind = &n_KeyBoard::VirtualKeys[ vkKey ];
+void OnLeftDown( VirtualKey_t vkThisKey, uint32_t uVkCode ) {
+	if ( vkThisKey.m_bIsDown ) { /* is key down? */
+		if ( vkThisKey.m_bWasDown ) { /* if key is down and key was down then the user is holding the key */
+			std::cout << "key is held down\n";
 
-	// only call this in callbacks
-	auto keyState = vkBind->GetKeyState( );
-
-
-	switch ( keyState ) {
-		case e_KeyState::KEY_HELD:
-		{
-			std::cout << "Key is held down\n";
+		} else {					  /* likewise, if the key is down and it wasnt down we know the use just hit the key */
+			std::cout << "key just pressed\n";
 		}
-		break;
 
-		case e_KeyState::KEY_PRESSED:
-		{
-			std::cout << "Key was pressed\n";
-		}
-		break;
+	} else {
+		if ( vkThisKey.m_bWasDown ) { /* if user was holding key down and they arent now we know they just released the key */
+			std::cout << "key was just released\n";
 
-		case e_KeyState::KEY_UNPRESSED:
-		{
-			std::cout << "Key was released\n";
-		}
-		break;
+		} else					  /* this will never be hit because of how the low level hook works however */
+			std::cout << "how did this get hit????\n";
 	}
-
 }
 
 int main( ) {
@@ -50,9 +39,9 @@ Written By: Blanket
 Github: https://github.com/fuckblanket/PlusBinder
 )";
 
-	n_KeyBoard::Initialize( );
+	CKeyboard::Get( ).Initialize( );
 
-	n_KeyBoard::VirtualKeys[ VK_LEFT ].m_KeyCallbacks.emplace_back( KeyDown );
+	CKeyboard::Get( ).SetCallback( VK_LEFT, OnLeftDown );
 
 	std::cin.get( );
 }

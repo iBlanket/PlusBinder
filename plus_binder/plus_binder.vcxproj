@@ -147,6 +147,7 @@
   <ItemGroup>
     <ClInclude Include="globals.h" />
     <ClInclude Include="keyboard.h" />
+    <ClInclude Include="singleton.h" />
     <ClInclude Include="vk_bind.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

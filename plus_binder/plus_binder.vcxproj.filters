@@ -34,5 +34,8 @@
     <ClInclude Include="keyboard.h">
       <Filter>header\core</Filter>
     </ClInclude>
+    <ClInclude Include="singleton.h">
+      <Filter>header</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
