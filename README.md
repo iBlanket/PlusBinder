@@ -31,62 +31,36 @@
 
 
 ## Usage
- - Copy keyboard.h, vk_bind.h, and keyboard.c++ to your project.
+ - Copy singleton.h, keyboard.h, vk_bind.h, and keyboard.c++ to your project.
 
 ### Initializing Key Manager
 
 ```C++
 int main(){
 // initializes keyboard hook and message loop (:
- n_KeyBoard::Initialize( );
+ CKeyboard::Get().Initialize();
 }
 ```
 ### Key States Callbacks
 ```C++
 
-void KeyDown( int vkKey ) {
-	VirtualKey_t* vkBind = &n_KeyBoard::VirtualKeys[ vkKey ];
-
-	// only call this in callbacks
-	auto keyState = vkBind->GetKeyState( );
-
-
-	switch ( keyState ) {
-		case e_KeyState::KEY_HELD:
-		{
-			std::cout << "Key is held down\n";
-		}
-		break;
-
-		case e_KeyState::KEY_PRESSED:
-		{
-			std::cout << "Key was pressed\n";
-		}
-		break;
-
-		case e_KeyState::KEY_UNPRESSED:
-		{
-			std::cout << "Key was released\n";
-		}
-		break;
-	}
+void KeyDown(VirtualKey_t VkKey, std::uint32_t uVkCode ) {
+// see main.c++ and vk_bind.h
 }
 
 void InitializeCallbacks(){
  // make sure you initialize keyboard before doing this
- // VirtualKeys is an array of all keys
- n_KeyBoard::VirtualKeys[ VK_LEFT ].OnKey.emplace_back( KeyDown );
+ // GetKey is thread safe now (:
+ auto vkInfo = CKeyboard::Get().SetCallback(VK_OUR_KEY, KeyDown);
 }
 ```
 
 ### Checking Key States
 ```C++
-// if youre in a keycallback use the above example ( vkBind->GetKeyState )
-// however, if youre not, GetKeyState will most likely be incorrect due to the keyboard hook not being called twice upon a key being released lol.
-// now for the actual example, if NOT in a key callback
- n_KeyBoard::VirtualKeys[ VK_LEFT ].m_bIsDown;
- // and
- n_KeyBoard::VirtualKeys[ VK_LEFT ].m_bWasDown; // was the key down or up the last time the keyhook was called.
+// see main.c++ for more examples and usage of key states, down and was down (:
+// outside of callbacks only use is down
+CKeyboard::Get().GetKeyInfo(VK_OUR_KEY).m_bIsDown; // 
+
 ```
 
 - For more documentation simply read the code
