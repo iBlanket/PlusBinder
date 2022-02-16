@@ -1,33 +1,4 @@
 # Global key binding written in C++
- 
- 
- ```C++
- // Style:
- 
- // Hungarian Notation for variables, eg.
- float flFloatingPoint;
- int iInteger;
- string szString;
- 
- // Member variables are prefixxed with m_ ex.
- float m_flFloatingPoint;
- int m_iInteger;
- string m_szString;
-
- // Classes, Namespaces, Structs, and enums are PascalCase and use the following prefixes ex.
- class CClassName
- namespace n_NamespaceName
- struct MyStruct_t
- 
- enum e_MyEnum{ // enum ex.
-  SCREAMING_SNAKECASE = 1,
-  SCREAMING_SNAKECASE2
- };
- 
- // All functions are written in PascalCase ex.
- void MyFunction();
- 
- ```
 
 
 ## Usage
@@ -62,5 +33,32 @@ void InitializeCallbacks(){
 CKeyboard::Get().GetKeyInfo(VK_OUR_KEY).m_bIsDown; // 
 
 ```
+## Code Style
+ ```C++
+ // Style:
+ 
+ // Hungarian Notation for variables, eg.
+ float flFloatingPoint;
+ int iInteger;
+ string szString;
+ 
+ // Member variables are prefixxed with m_ ex.
+ float m_flFloatingPoint;
+ int m_iInteger;
+ string m_szString;
 
+ // Classes, Namespaces, Structs, and enums are PascalCase and use the following prefixes ex.
+ class CClassName
+ namespace n_NamespaceName
+ struct MyStruct_t
+ 
+ enum e_MyEnum{ // enum ex.
+  SCREAMING_SNAKECASE = 1,
+  SCREAMING_SNAKECASE2
+ };
+ 
+ // All functions are written in PascalCase ex.
+ void MyFunction();
+ 
+ ```
 - For more documentation simply read the code
