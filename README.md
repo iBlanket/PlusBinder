@@ -1,7 +1,7 @@
 # Global key binding written in C++
 
 
-## Usage
+## Usage Examples
  - Copy singleton.h, keyboard.h, vk_bind.h, and keyboard.c++ to your project.
 
 ### Initializing Key Manager
@@ -33,7 +33,7 @@ void InitializeCallbacks(){
 CKeyboard::Get().GetKeyInfo(VK_OUR_KEY).m_bIsDown; // 
 
 ```
-## Code Style
+# Code Style
  ```C++
  // Style:
  
@@ -60,5 +60,13 @@ CKeyboard::Get().GetKeyInfo(VK_OUR_KEY).m_bIsDown; //
  // All functions are written in PascalCase ex.
  void MyFunction();
  
+ // functions are documented via comment "headers" where they are declared. ex.
+ 
+ //================================================
+ // Purpose: Show how functions are documented
+ // uArg1: Meaningless argument 
+ // Returns: 0
+ //================================================
+ void MyFunction(const std::uint32_t uArg1);
+ 
  ```
-- For more documentation simply read the code
