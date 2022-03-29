@@ -17,10 +17,10 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.c++">
+    <ClCompile Include="main.cc">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="keyboard.c++">
+    <ClCompile Include="keyboard.cc">
       <Filter>source\core</Filter>
     </ClCompile>
   </ItemGroup>

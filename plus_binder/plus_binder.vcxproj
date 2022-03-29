@@ -141,8 +141,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="keyboard.c++" />
-    <ClCompile Include="main.c++" />
+    <ClCompile Include="keyboard.cc" />
+    <ClCompile Include="main.cc" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="globals.h" />
