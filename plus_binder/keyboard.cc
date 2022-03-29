@@ -30,7 +30,6 @@ void CKeyboard::OnLowLevelHook(int nCode, WPARAM wParam, LPARAM lParam) {
 		pBindableKey->m_KeyCallback(*pBindableKey, pKbdll->vkCode);
 }
 
-
 VirtualKey_t CKeyboard::GetKeyInfo(const std::uint32_t uVkCode) {
 	std::scoped_lock(m_KeyMutex);
 	return m_VirtualKeys[uVkCode];
@@ -49,13 +48,13 @@ LRESULT CALLBACK WinCallbackKBDLL(int nCode, WPARAM wParam, LPARAM lParam) {
 	return CallNextHookEx(hkKbdHook, nCode, wParam, lParam);
 }
 
-
 void CKeyboard::Initialize() {
 	/* ensure we dont initialize more than once */
 	if (hkKbdHook)
 		return;
 
-	std::thread thdMsgLoop([]() {
+	/* yes, theres no way to safely exit this thread, it shouldnt be a significant issue though. */
+	std::thread([]() {
 
 		/* initialize key hook */
 		hkKbdHook = SetWindowsHookEx(WH_KEYBOARD_LL, reinterpret_cast<HOOKPROC>(WinCallbackKBDLL), 0, 0);
@@ -71,6 +70,5 @@ void CKeyboard::Initialize() {
 			}
 		}
 		}
-	);
-	thdMsgLoop.detach();
+	).detach();
 }
