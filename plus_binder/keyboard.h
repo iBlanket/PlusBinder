@@ -20,30 +20,30 @@ public:
 	//==============================================================
 	// Purpose: Multi-Thread & Initialize the keyboard handler
 	//==============================================================
-	void Initialize( );
+	void Initialize();
 
 
 	//==============================================================
 	// Purpose: Update m_VirtualKeys
 	//==============================================================
-	void OnLowLevelHook( int nCode, WPARAM wParam, LPARAM lParam );
+	void OnLowLevelHook(int nCode, WPARAM wParam, LPARAM lParam);
 
 
 	//==============================================================
 	// Purpose: Thread safe get information about keys [ COPY ]
 	//==============================================================
-	VirtualKey_t GetKeyInfo( const std::uint32_t uVkCode );
+	VirtualKey_t GetKeyInfo(const std::uint32_t uVkCode);
 
 
 	//==============================================================
 	// Purpose: Set the key callback
 	//==============================================================
-	void SetCallback( const std::uint32_t uVkCode, const std::function<void( VirtualKey_t, std::uint32_t )>& pCallbackFunction );
+	void SetCallback(const std::uint32_t uVkCode, const std::function<void(VirtualKey_t, std::uint32_t)>& pCallbackFunction);
 
 
 private:
-	std::mutex m_KeyMutex;
+	std::mutex m_KeyMutex{};
 
-	VirtualKey_t m_VirtualKeys[ 256 ]{ };
+	VirtualKey_t m_VirtualKeys[256]{ };
 };
 

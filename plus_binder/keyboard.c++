@@ -9,74 +9,71 @@
 #include <thread>
 #include "keyboard.h"
 
-/* no need for mutex for this, its only ever accessed from 1 thread after the initialization ( other thread that accesses it ) is finished */
-HHOOK* hkKbdHook = nullptr;
+HHOOK hkKbdHook = 0;
 
-void CKeyboard::OnLowLevelHook( int nCode, WPARAM wParam, LPARAM lParam ) {
+void CKeyboard::OnLowLevelHook(int nCode, WPARAM wParam, LPARAM lParam) {
 
 	/* lock mutex's up here */
-	std::scoped_lock( m_KeyMutex );
+	std::scoped_lock(m_KeyMutex);
 
 	/* get KBDLLHOOKSTRUCT info */
-	auto pKbdll = ( KBDLLHOOKSTRUCT* )lParam;
+	auto pKbdll = (KBDLLHOOKSTRUCT*)lParam;
 
-	VirtualKey_t* pBindableKey = &m_VirtualKeys[ pKbdll->vkCode ];
+	VirtualKey_t* pBindableKey = &m_VirtualKeys[pKbdll->vkCode];
 
 	/* update key states */
 	pBindableKey->m_bWasDown = pBindableKey->m_bIsDown;
 	pBindableKey->m_bIsDown = wParam == WM_KEYDOWN && wParam != WM_KEYUP;
 
 	/* call all our callbacks */
-	if ( pBindableKey->m_KeyCallback ) // this shouldnt ever be hit
-		pBindableKey->m_KeyCallback( *pBindableKey, pKbdll->vkCode );
+	if (pBindableKey->m_KeyCallback) // this shouldnt ever be hit
+		pBindableKey->m_KeyCallback(*pBindableKey, pKbdll->vkCode);
 }
 
 
-VirtualKey_t CKeyboard::GetKeyInfo( const std::uint32_t uVkCode ) {
+VirtualKey_t CKeyboard::GetKeyInfo(const std::uint32_t uVkCode) {
 	/* note: yes, making a copy each time is slow. this is thread safe tho (: */
-	std::scoped_lock( m_KeyMutex );
-	return m_VirtualKeys[ uVkCode ];
+	std::scoped_lock(m_KeyMutex);
+	return m_VirtualKeys[uVkCode];
 }
 
 
-void CKeyboard::SetCallback( const std::uint32_t uVkCode, const std::function<void( VirtualKey_t, std::uint32_t )>& pCallbackFunction ) {
+void CKeyboard::SetCallback(const std::uint32_t uVkCode, const std::function<void(VirtualKey_t, std::uint32_t)>& pCallbackFunction) {
 	/* note: this isnt really that safe or good, just use it smartly! */
-	std::scoped_lock( m_KeyMutex );
-	m_VirtualKeys[ uVkCode ].m_KeyCallback = pCallbackFunction;
+	std::scoped_lock(m_KeyMutex);
+	m_VirtualKeys[uVkCode].m_KeyCallback = pCallbackFunction;
 }
 
 
-LRESULT CALLBACK WinCallbackKBDLL( int nCode, WPARAM wParam, LPARAM lParam ) {
-	CKeyboard::Get( ).OnLowLevelHook( nCode, wParam, lParam );
+LRESULT CALLBACK WinCallbackKBDLL(int nCode, WPARAM wParam, LPARAM lParam) {
+	CKeyboard::Get().OnLowLevelHook(nCode, wParam, lParam);
 
 	/* */
-	return CallNextHookEx( *hkKbdHook, nCode, wParam, lParam );
+	return CallNextHookEx(hkKbdHook, nCode, wParam, lParam);
 }
 
 
-void CKeyboard::Initialize( ) {
+void CKeyboard::Initialize() {
 	/* ensure we dont initialize more than once */
-	if ( hkKbdHook )
+	if (hkKbdHook)
 		return;
 
-	hkKbdHook = ( HHOOK* )malloc( sizeof( HHOOK ) );
-
-	std::thread thdMsgLoop( [ ]( ) {
+	std::thread thdMsgLoop([]() {
 
 		/* initialize key hook */
-		*hkKbdHook = SetWindowsHookEx( WH_KEYBOARD_LL, ( HOOKPROC )WinCallbackKBDLL, 0, 0 );
+		hkKbdHook = SetWindowsHookEx(WH_KEYBOARD_LL, (HOOKPROC)WinCallbackKBDLL, 0, 0);
 
 		/* message loop */
 		{
 			MSG* pMsg = nullptr;
 
-			while ( 1 ) {
-				GetMessage( pMsg, nullptr, NULL, NULL );
-				TranslateMessage( pMsg );
-				DispatchMessage( pMsg );
+			while (1) {
+				GetMessage(pMsg, nullptr, NULL, NULL);
+				TranslateMessage(pMsg);
+				DispatchMessage(pMsg);
 			}
 		}
-	}
+		}
 	);
-	thdMsgLoop.detach( );
+	thdMsgLoop.detach();
 }
