@@ -1,5 +1,14 @@
 # Global key binding written in C++
 
+i was originally very happy with this project, im not having much fun with it and im sorry if the code quality in recent updates has cause a decrease in this project. this is the last update to clear all stuff up before a break from this. if you want to contribute the todo list is as follows.
+
+TODO:
+Flag management
+Remove singletons
+Fix thread safety being aids
+Move everything to 1 header to increase ease of use.
+inline some functions.
+get rid of the endless thread.
 
 ## Usage Examples
  - Copy singleton.h, keyboard.h, vk_bind.h, and keyboard.c++ to your project.
