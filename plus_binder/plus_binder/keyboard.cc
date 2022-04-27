@@ -11,7 +11,7 @@
 
 HHOOK hkKbdHook = 0;
 
-void CKeyboard::OnLowLevelHook(int nCode, WPARAM wParam, LPARAM lParam) {
+void plus_binder::CKeyboard::OnLowLevelHook(uint32_t nCode, WPARAM wParam, LPARAM lParam) {
 
 	/* lock mutex's up here */
 	std::scoped_lock(m_KeyMutex);
@@ -22,33 +22,22 @@ void CKeyboard::OnLowLevelHook(int nCode, WPARAM wParam, LPARAM lParam) {
 	VirtualKey_t* pBindableKey = &m_VirtualKeys[pKbdll->vkCode];
 
 	/* update key states */
-	pBindableKey->m_bWasDown = pBindableKey->m_bIsDown;
-	pBindableKey->m_bIsDown = wParam == WM_KEYDOWN && wParam != WM_KEYUP;
+	pBindableKey->m_uLastWParam = wParam;
 
 	/* call all our callbacks */
 	if (pBindableKey->m_KeyCallback) // this shouldnt ever be hit
 		pBindableKey->m_KeyCallback(*pBindableKey, pKbdll->vkCode);
 }
 
-VirtualKey_t CKeyboard::GetKeyInfo(const std::uint32_t uVkCode) {
-	std::scoped_lock(m_KeyMutex);
-	return m_VirtualKeys[uVkCode];
-}
-
-void CKeyboard::SetCallback(const std::uint32_t uVkCode, const std::function<void(VirtualKey_t, std::uint32_t)>& pCallbackFunction) {
-	std::scoped_lock(m_KeyMutex);
-	m_VirtualKeys[uVkCode].m_KeyCallback = pCallbackFunction;
-}
-
-
 LRESULT CALLBACK WinCallbackKBDLL(int nCode, WPARAM wParam, LPARAM lParam) {
-	CKeyboard::Get().OnLowLevelHook(nCode, wParam, lParam);
+	plus_binder::CKeyboard::Get().OnLowLevelHook(nCode, wParam, lParam);
 
 	/* */
 	return CallNextHookEx(hkKbdHook, nCode, wParam, lParam);
 }
 
-void CKeyboard::Initialize() {
+
+void plus_binder::CKeyboard::Initialize() {
 	/* ensure we dont initialize more than once */
 	if (hkKbdHook)
 		return;

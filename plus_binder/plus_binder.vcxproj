@@ -141,14 +141,13 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="keyboard.cc" />
+    <ClCompile Include="plus_binder\keyboard.cc" />
     <ClCompile Include="main.cc" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="globals.h" />
-    <ClInclude Include="keyboard.h" />
-    <ClInclude Include="singleton.h" />
-    <ClInclude Include="vk_bind.h" />
+    <ClInclude Include="plus_binder\keyboard.h" />
+    <ClInclude Include="plus_binder\singleton.h" />
+    <ClInclude Include="plus_binder\virtual_key.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

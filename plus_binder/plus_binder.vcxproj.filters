@@ -20,21 +20,18 @@
     <ClCompile Include="main.cc">
       <Filter>source</Filter>
     </ClCompile>
-    <ClCompile Include="keyboard.cc">
+    <ClCompile Include="plus_binder\keyboard.cc">
       <Filter>source\core</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="globals.h">
+    <ClInclude Include="plus_binder\keyboard.h">
+      <Filter>header\core</Filter>
+    </ClInclude>
+    <ClInclude Include="plus_binder\singleton.h">
       <Filter>header</Filter>
     </ClInclude>
-    <ClInclude Include="vk_bind.h">
-      <Filter>header\core</Filter>
-    </ClInclude>
-    <ClInclude Include="keyboard.h">
-      <Filter>header\core</Filter>
-    </ClInclude>
-    <ClInclude Include="singleton.h">
+    <ClInclude Include="plus_binder\virtual_key.h">
       <Filter>header</Filter>
     </ClInclude>
   </ItemGroup>
